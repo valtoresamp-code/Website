@@ -62,13 +62,13 @@ export default function App() {
         <Cat className="small-cat"/>
       </motion.section>}
       {screen === 'secret' && <motion.section key="secret" className="screen secret-screen" {...motionProps}>
-        <div className="glow-heart"><Heart size={32} fill="currentColor"/></div><p className="eyebrow">psst…</p><h2 className="screen-title">Небольшой секрет<span>...</span></h2>
-        <div className="secret-card"><p>В пятницу нас ждёт один красивый вечер.</p><p>Часть ты уже знаешь.<br/>Но кое-что я оставлю сюрпризом.</p><p>Потому что приятные вещи не всегда нужно раскрывать заранее <b>♡</b></p></div>
+        <div className="glow-heart"><Heart size={32} fill="currentColor"/></div><p className="eyebrow">пятница · 6 ноября</p><h2 className="screen-title">План на вечер</h2>
+        <div className="secret-card"><p>Сначала сходим в кино.</p><p>Остальное пока оставлю в секрете.</p><p>Расскажу, когда увидимся.</p></div>
         <Cat mood="happy" className="secret-cat"/><Button onClick={() => go('invite')}>Хочу увидеть приглашение <Heart size={15}/></Button>
       </motion.section>}
       {screen === 'invite' && <motion.section key="invite" className="screen invite-screen" {...motionProps}>
         <article className="invite-card"><div className="invite-border"><div className="invite-top"><span>✧</span><span className="eyebrow">A special evening for you</span><span>✧</span></div>
-          <div className="invite-flower">✦</div><h2>Настя,<br/><em>пятница — наш вечер</em></h2>
+          <div className="invite-flower">✦</div><h2>Нась,<br/><em>увидимся в пятницу</em></h2>
           <div className="divider"><i/>♡<i/></div>
           <p className="date-label">ПЯТНИЦА · 6 НОЯБРЯ 2026</p><p className="date">В 17:00 зайду за тобой.<br/>Будь готова.</p>
           <div className="format-pill"><Sparkles size={15}/> Кино. Остальное — сюрприз.</div>
@@ -78,7 +78,7 @@ export default function App() {
         </div></article>
       </motion.section>}
       {screen === 'final' && <motion.section key="final" className="screen final-screen" {...motionProps}>
-        <div className="final-hearts">♡　✦　♡</div><Cat mood="happy" className="final-cat"/><p className="eyebrow">уже совсем скоро</p><h2>До пятницы,<br/><em>Насть</em> ♡</h2>
+        <div className="final-hearts">♡　✦　♡</div><Cat mood="happy" className="final-cat"/><p className="eyebrow">до встречи</p><h2><em>Увидимся</em><br/>в пятницу, Нась</h2>
         <p className="final-copy">Надеюсь, этот маленький сюрприз подарил тебе улыбку. Теперь осталось дождаться нашей встречи ♡</p>
         <Button onClick={() => go('invite')}>Посмотреть ещё раз <Heart size={15}/></Button><button className="text-button" onClick={close}><X size={15}/> Закрыть</button>
         <p className="signature">с теплом, для тебя <span>♡</span></p>
