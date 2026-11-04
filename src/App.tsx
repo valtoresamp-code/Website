@@ -44,13 +44,13 @@ export default function App() {
         <h1>Для тебя<br/><em>есть кое-что</em></h1>
         <p className="body-copy">Я приготовил кое-что<br className="mobile-break"/> специально для тебя</p>
         <Button onClick={() => go('letter')}>Открыть письмо <Heart size={16} fill="currentColor"/></Button>
-        <div className="footnote"><Sparkles size={13}/> маленький сюрприз, только для тебя</div>
+        <div className="footnote"><Sparkles size={13}/> небольшое письмо для тебя</div>
       </motion.section>}
       {screen === 'letter' && <motion.section key="letter" className="screen" {...motionProps}>
         <div className="letter-card"><span className="card-stamp">♡</span><p className="eyebrow">небольшое письмо</p>
           <h2>Привет, Насть <span>♡</span></h2>
           <div className="letter-copy">
-            {['Я хотел сделать для тебя что-то необычное.','Не просто сообщение.','А маленький, милый и особенный сюрприз.','Поэтому появилось это мини-приложение.','Оно только для тебя.'].map((line,i)=><motion.p key={line} initial={reduceMotion?false:{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:.2+i*.32,...transition}}>{line}</motion.p>)}
+            {['Я хотел сделать для тебя что-то необычное.','Не просто сообщение.','А небольшое приглашение на вечер вместе.','Поэтому появилось это мини-приложение.','Оно только для тебя.'].map((line,i)=><motion.p key={line} initial={reduceMotion?false:{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:.2+i*.32,...transition}}>{line}</motion.p>)}
           </div><Cat className="letter-cat"/><Button onClick={() => go('question')}>Продолжить <span>♡</span></Button>
         </div>
       </motion.section>}
@@ -63,7 +63,7 @@ export default function App() {
       </motion.section>}
       {screen === 'secret' && <motion.section key="secret" className="screen secret-screen" {...motionProps}>
         <div className="glow-heart"><Heart size={32} fill="currentColor"/></div><p className="eyebrow">пятница · 6 ноября</p><h2 className="screen-title">План на вечер</h2>
-        <div className="secret-card"><p>Сначала сходим в кино.</p><p>Остальное пока оставлю в секрете.</p><p>Расскажу, когда увидимся.</p></div>
+        <div className="secret-card"><p>Сначала сходим в кино.</p><p>После решим, чем заняться дальше.</p><p>До встречи!</p></div>
         <Cat mood="happy" className="secret-cat"/><Button onClick={() => go('invite')}>Хочу увидеть приглашение <Heart size={15}/></Button>
       </motion.section>}
       {screen === 'invite' && <motion.section key="invite" className="screen invite-screen" {...motionProps}>
@@ -71,7 +71,7 @@ export default function App() {
           <div className="invite-flower">✦</div><h2>Нась,<br/><em>увидимся в пятницу</em></h2>
           <div className="divider"><i/>♡<i/></div>
           <p className="date-label">ПЯТНИЦА · 6 НОЯБРЯ 2026</p><p className="date">В 17:00 зайду за тобой.<br/>Будь готова.</p>
-          <div className="format-pill"><Sparkles size={15}/> Кино. Остальное — сюрприз.</div>
+          <div className="format-pill"><Sparkles size={15}/> Кино, а дальше решим на месте.</div>
           <p className="invite-copy">Как думаешь, что делает вечер особенным?</p>
           <Cat mood="happy" className="invite-cat"/>
           <div className="invite-actions"><Button onClick={() => {localStorage.setItem('nastya-answer','буду ждать пятницы');go('final')}}>Буду ждать пятницы ♡</Button><Button secondary onClick={() => {localStorage.setItem('nastya-answer','это очень мило');go('final')}}>Это очень мило</Button></div>
@@ -79,7 +79,7 @@ export default function App() {
       </motion.section>}
       {screen === 'final' && <motion.section key="final" className="screen final-screen" {...motionProps}>
         <div className="final-hearts">♡　✦　♡</div><Cat mood="happy" className="final-cat"/><p className="eyebrow">до встречи</p><h2><em>Увидимся</em><br/>в пятницу, Нась</h2>
-        <p className="final-copy">Надеюсь, этот маленький сюрприз подарил тебе улыбку. Теперь осталось дождаться нашей встречи ♡</p>
+        <p className="final-copy">Надеюсь, тебе понравилось это письмо. Теперь осталось дождаться нашей встречи ♡</p>
         <Button onClick={() => go('invite')}>Посмотреть ещё раз <Heart size={15}/></Button><button className="text-button" onClick={close}><X size={15}/> Закрыть</button>
         <p className="signature">с теплом, для тебя <span>♡</span></p>
       </motion.section>}
