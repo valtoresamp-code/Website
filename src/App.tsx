@@ -68,11 +68,11 @@ export default function App() {
       </motion.section>}
       {screen === 'invite' && <motion.section key="invite" className="screen invite-screen" {...motionProps}>
         <article className="invite-card"><div className="invite-border"><div className="invite-top"><span>✧</span><span className="eyebrow">A special evening for you</span><span>✧</span></div>
-          <div className="invite-flower">❀</div><h2>Настя, приглашаю<br/>тебя на <em>особенный<br/>вечер</em> <span>♡</span></h2>
+          <div className="invite-flower">✦</div><h2>Настя,<br/><em>пятница — наш вечер</em></h2>
           <div className="divider"><i/>♡<i/></div>
-          <p className="date-label">НАША ВСТРЕЧА</p><p className="date">Пятница, 6 ноября<br/>2026</p>
-          <div className="format-pill"><Sparkles size={15}/> Кино и ещё немного приятной магии</div>
-          <p className="invite-copy">Мне хочется, чтобы этот вечер был для тебя тёплым, милым и запоминающимся.</p>
+          <p className="date-label">ПЯТНИЦА · 6 НОЯБРЯ 2026</p><p className="date">В 17:00 зайду за тобой.<br/>Будь готова.</p>
+          <div className="format-pill"><Sparkles size={15}/> Кино. Остальное — сюрприз.</div>
+          <p className="invite-copy">Как думаешь, что делает вечер особенным?</p>
           <Cat mood="happy" className="invite-cat"/>
           <div className="invite-actions"><Button onClick={() => {localStorage.setItem('nastya-answer','буду ждать пятницы');go('final')}}>Буду ждать пятницы ♡</Button><Button secondary onClick={() => {localStorage.setItem('nastya-answer','это очень мило');go('final')}}>Это очень мило</Button></div>
         </div></article>
