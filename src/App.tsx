@@ -23,7 +23,6 @@ function Button({ children, onClick, secondary = false }: { children: React.Reac
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>('welcome')
-  const [accepted, setAccepted] = useState(false)
   const [noPosition, setNoPosition] = useState(0)
   const reduceMotion = useReducedMotion()
   const motionProps = reduceMotion ? {} : { initial: { opacity: 0, y: 18, scale: .985 }, animate: { opacity: 1, y: 0, scale: 1 }, exit: { opacity: 0, y: -12, scale: .99 }, transition }
@@ -61,11 +60,10 @@ export default function App() {
           <p className="eyebrow">пятница · 6 ноября</p>
           <h2 className="screen-title">Ты ведь<br/>не передумала?</h2>
           <p className="question-hint">Выбери правильный ответ</p>
-          {!accepted && <div className="yes-no-area">
-            <Button onClick={() => setAccepted(true)}>Не передумала</Button>
+          <div className="yes-no-area">
+            <Button onClick={() => go('invite')}>Не передумала</Button>
             <motion.button className={`no-button no-position-${noPosition}`} onPointerEnter={dodgeNo} onPointerDown={(event) => { event.preventDefault(); dodgeNo() }} onClick={dodgeNo} layout transition={{ type: 'spring', stiffness: 420, damping: 25 }}>Передумала</motion.button>
-          </div>}
-          <AnimatePresence>{accepted && <motion.div className="question-answer" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0}}><p>Отлично. В пятницу зайду за тобой в 17:00.</p><Button onClick={() => go('invite')}>Смотреть приглашение</Button></motion.div>}</AnimatePresence>
+          </div>
         </div>
       </motion.section>}
       {screen === 'invite' && <motion.section key="invite" className="screen invite-screen" {...motionProps}>
