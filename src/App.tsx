@@ -23,12 +23,13 @@ function Button({ children, onClick, secondary = false }: { children: React.Reac
 
 export default function App() {
   const [screen, setScreen] = useState<Screen>('welcome')
-  const [choice, setChoice] = useState('')
-  const [answer, setAnswer] = useState<string | null>(null)
+  const [accepted, setAccepted] = useState(false)
+  const [noPosition, setNoPosition] = useState({ x: 0, y: 0 })
   const reduceMotion = useReducedMotion()
   const motionProps = reduceMotion ? {} : { initial: { opacity: 0, y: 18, scale: .985 }, animate: { opacity: 1, y: 0, scale: 1 }, exit: { opacity: 0, y: -12, scale: .99 }, transition }
   const go = (next: Screen) => setScreen(next)
   const close = () => window.Telegram?.WebApp ? window.Telegram.WebApp.close?.() : go('welcome')
+  const dodgeNo = () => setNoPosition({ x: Math.round((Math.random() - .5) * 180), y: Math.round((Math.random() - .5) * 90) })
 
   return <main className="app-shell">
     <div className="ambient ambient-one"/><div className="ambient ambient-two"/>
@@ -55,11 +56,12 @@ export default function App() {
         </div>
       </motion.section>}
       {screen === 'question' && <motion.section key="question" className="screen" {...motionProps}>
-        <p className="eyebrow">маленький вопрос</p><h2 className="screen-title">Как думаешь, что делает<br/>вечер особенным?</h2>
-        <div className="choices">{['Атмосфера ✨','Человек рядом ♡','Немного магии 🌙'].map((item,i)=><motion.button key={item} className={`choice ${choice===item?'selected':''}`} onClick={() => {setChoice(item);setAnswer(item)}} initial={reduceMotion?false:{opacity:0,x:-12}} animate={{opacity:1,x:0}} transition={{delay:.12+i*.1,...transition}}>{item}<span>{choice===item?'♥':'♡'}</span></motion.button>)}</div>
-        <AnimatePresence>{answer && <motion.div className="answer" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0}}><p>Мне кажется, всё становится особенным, если рядом нужный человек.</p><p>Именно поэтому я хочу провести этот вечер с тобой <b>♡</b></p></motion.div>}</AnimatePresence>
-        <Button onClick={() => go('secret')} >Дальше <span>♡</span></Button>
-        <Cat className="small-cat"/>
+        <p className="eyebrow">пятница · 6 ноября</p><h2 className="screen-title">Пойдём в кино<br/>в пятницу?</h2>
+        <div className="yes-no-area">
+          <Button onClick={() => setAccepted(true)}>Да</Button>
+          <motion.button className="no-button" style={{ x: noPosition.x, y: noPosition.y }} onPointerEnter={dodgeNo} onPointerDown={(event) => { event.preventDefault(); dodgeNo() }} onClick={dodgeNo} transition={{ type: 'spring', stiffness: 420, damping: 22 }}>Нет</motion.button>
+        </div>
+        <AnimatePresence>{accepted && <motion.div className="answer" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0}}><p>Отлично. В пятницу заеду за тобой в 17:00.</p><Button onClick={() => go('secret')}>Дальше</Button></motion.div>}</AnimatePresence>
       </motion.section>}
       {screen === 'secret' && <motion.section key="secret" className="screen secret-screen" {...motionProps}>
         <div className="glow-heart"><Heart size={32} fill="currentColor"/></div><p className="eyebrow">пятница · 6 ноября</p><h2 className="screen-title">План на вечер</h2>
