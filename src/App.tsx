@@ -3,7 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ArrowLeft, Heart, Sparkles, X } from 'lucide-react'
 import Cat from './Cat'
 
-const screens = ['welcome', 'letter', 'question', 'secret', 'invite', 'final'] as const
+const screens = ['welcome', 'letter', 'question', 'invite', 'final'] as const
 type Screen = typeof screens[number]
 const transition = { duration: 0.48, ease: [0.22, 1, 0.36, 1] as const }
 
@@ -37,7 +37,7 @@ export default function App() {
     <div className="floating-hearts" aria-hidden="true">{['♡','♥','♡','✦','♡'].map((h,i)=><span key={i} style={{'--i':i} as React.CSSProperties}>{h}</span>)}</div>
     <header className="topline"><span className="brand-mark"><Heart size={13} fill="currentColor"/> a little thing for you</span><span className="tiny-note">made with love ♡</span></header>
     {screen !== 'welcome' && screen !== 'final' && <button className="back-button" aria-label="Назад" onClick={() => go(screens[Math.max(0, screens.indexOf(screen)-1)])}><ArrowLeft size={17}/></button>}
-    <div className="progress" aria-label={`Экран ${screens.indexOf(screen)+1} из 6`}>{screens.map((s,i)=><span key={s} className={i <= screens.indexOf(screen) ? 'active' : ''}/>)}</div>
+    <div className="progress" aria-label={`Экран ${screens.indexOf(screen)+1} из ${screens.length}`}>{screens.map((s,i)=><span key={s} className={i <= screens.indexOf(screen) ? 'active' : ''}/>)}</div>
     <AnimatePresence mode="wait">
       {screen === 'welcome' && <motion.section key="welcome" className="screen welcome" {...motionProps}>
         <p className="eyebrow">Only for Nastya <span>♡</span></p>
@@ -65,13 +65,8 @@ export default function App() {
             <Button onClick={() => setAccepted(true)}>Не передумала</Button>
             <motion.button className={`no-button no-position-${noPosition}`} onPointerEnter={dodgeNo} onPointerDown={(event) => { event.preventDefault(); dodgeNo() }} onClick={dodgeNo} layout transition={{ type: 'spring', stiffness: 420, damping: 25 }}>Передумала</motion.button>
           </div>}
-          <AnimatePresence>{accepted && <motion.div className="question-answer" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0}}><p>Отлично. В пятницу зайду за тобой в 17:00.</p><Button onClick={() => go('secret')}>Дальше</Button></motion.div>}</AnimatePresence>
+          <AnimatePresence>{accepted && <motion.div className="question-answer" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0}}><p>Отлично. В пятницу зайду за тобой в 17:00.</p><Button onClick={() => go('invite')}>Смотреть приглашение</Button></motion.div>}</AnimatePresence>
         </div>
-      </motion.section>}
-      {screen === 'secret' && <motion.section key="secret" className="screen secret-screen" {...motionProps}>
-        <div className="glow-heart"><Heart size={32} fill="currentColor"/></div><p className="eyebrow">пятница · 6 ноября</p><h2 className="screen-title">План на вечер</h2>
-        <div className="secret-card"><p>Сначала сходим в кино.</p><p>После решим, чем заняться дальше.</p><p>До встречи!</p></div>
-        <Cat mood="happy" className="secret-cat"/><Button onClick={() => go('invite')}>Хочу увидеть приглашение <Heart size={15}/></Button>
       </motion.section>}
       {screen === 'invite' && <motion.section key="invite" className="screen invite-screen" {...motionProps}>
         <article className="invite-card"><div className="invite-border"><div className="invite-top"><span>✧</span><span className="eyebrow">A special evening for you</span><span>✧</span></div>
