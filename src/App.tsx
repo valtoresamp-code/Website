@@ -70,17 +70,15 @@ export default function App() {
       </motion.section>}
       {screen === 'invite' && <motion.section key="invite" className="screen invite-screen" {...motionProps}>
         <article className="invite-card"><div className="invite-border"><div className="invite-top"><span>✧</span><span className="eyebrow">A special evening for you</span><span>✧</span></div>
-          <div className="invite-flower">✦</div><h2>Нась,<br/><em>увидимся в пятницу</em></h2>
+          <div className="invite-flower">✦</div><h2>Нась,<br/><em>увидимся завтра</em></h2>
           <div className="divider"><i/>♡<i/></div>
-          <p className="date-label">ПЯТНИЦА · 6 НОЯБРЯ 2026</p><p className="date">В 17:00 зайду за тобой.<br/>Будь готова.</p>
-          <div className="format-pill"><Sparkles size={15}/> Кино, а дальше решим на месте.</div>
-          <p className="invite-copy">Как думаешь, что делает вечер особенным?</p>
+          <p className="date-label">ЗАВТРА · 17:00</p><p className="date">В 17:00 зайду за тобой.<br/>Будь готова.</p>
           <Cat mood="happy" className="invite-cat"/>
-          <div className="invite-actions"><Button onClick={() => {localStorage.setItem('nastya-answer','буду ждать пятницы');go('final')}}>Буду ждать пятницы ♡</Button><Button secondary onClick={() => {localStorage.setItem('nastya-answer','это очень мило');go('final')}}>Это очень мило</Button></div>
+          <div className="invite-actions"><Button onClick={() => {localStorage.setItem('nastya-answer','буду готова');go('final')}}>Хорошо, буду готова</Button><Button secondary onClick={() => {localStorage.setItem('nastya-answer','жду тебя');go('final')}}>Жду тебя</Button></div>
         </div></article>
       </motion.section>}
       {screen === 'final' && <motion.section key="final" className="screen final-screen" {...motionProps}>
-        <div className="final-hearts">♡　✦　♡</div><Cat mood="happy" className="final-cat"/><p className="eyebrow">до встречи</p><h2><em>Увидимся</em><br/>в пятницу, Нась</h2>
+        <div className="final-hearts">♡　✦　♡</div><Cat mood="happy" className="final-cat"/><p className="eyebrow">до встречи</p><h2><em>Увидимся</em><br/>завтра, Нась</h2>
         <p className="final-copy">Надеюсь, тебе понравилось это письмо. Теперь осталось дождаться нашей встречи ♡</p>
         <Button onClick={() => go('invite')}>Посмотреть ещё раз <Heart size={15}/></Button><button className="text-button" onClick={close}><X size={15}/> Закрыть</button>
         <p className="signature">с теплом, для тебя <span>♡</span></p>
