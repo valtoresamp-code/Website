@@ -56,10 +56,10 @@ export default function App() {
         </div>
       </motion.section>}
       {screen === 'question' && <motion.section key="question" className="screen" {...motionProps}>
-        <p className="eyebrow">пятница · 6 ноября</p><h2 className="screen-title">Пойдём в кино<br/>в пятницу?</h2>
+        <p className="eyebrow">пятница · 6 ноября</p><h2 className="screen-title">Ты ведь<br/>не передумала?</h2>
         <div className="yes-no-area">
-          <Button onClick={() => setAccepted(true)}>Да</Button>
-          <motion.button className="no-button" style={{ x: noPosition.x, y: noPosition.y }} onPointerEnter={dodgeNo} onPointerDown={(event) => { event.preventDefault(); dodgeNo() }} onClick={dodgeNo} transition={{ type: 'spring', stiffness: 420, damping: 22 }}>Нет</motion.button>
+          <Button onClick={() => setAccepted(true)}>Не передумала</Button>
+          <motion.button className="no-button" style={{ x: noPosition.x, y: noPosition.y }} onPointerEnter={dodgeNo} onPointerDown={(event) => { event.preventDefault(); dodgeNo() }} onClick={dodgeNo} transition={{ type: 'spring', stiffness: 420, damping: 22 }}>Передумала</motion.button>
         </div>
         <AnimatePresence>{accepted && <motion.div className="answer" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0}}><p>Отлично. В пятницу заеду за тобой в 17:00.</p><Button onClick={() => go('secret')}>Дальше</Button></motion.div>}</AnimatePresence>
       </motion.section>}
