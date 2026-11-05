@@ -50,7 +50,7 @@ export default function App() {
         <div className="letter-card"><span className="card-stamp">♡</span><p className="eyebrow">небольшое письмо</p>
           <h2>Привет, Насть <span>♡</span></h2>
           <div className="letter-copy">
-            {['Я хотел сделать для тебя что-то необычное.','Не просто сообщение.','А небольшое приглашение на вечер вместе.','Поэтому появилось это мини-приложение.','Оно только для тебя.'].map((line,i)=><motion.p key={line} initial={reduceMotion?false:{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:.2+i*.32,...transition}}>{line}</motion.p>)}
+            {['Хотел пригласить тебя немного необычно.','Поэтому вместо обычного сообщения','получилось это приложение.'].map((line,i)=><motion.p key={line} initial={reduceMotion?false:{opacity:0,y:8}} animate={{opacity:1,y:0}} transition={{delay:.2+i*.32,...transition}}>{line}</motion.p>)}
           </div><Cat className="letter-cat"/><Button onClick={() => go('question')}>Продолжить <span>♡</span></Button>
         </div>
       </motion.section>}
