@@ -24,12 +24,12 @@ function Button({ children, onClick, secondary = false }: { children: React.Reac
 export default function App() {
   const [screen, setScreen] = useState<Screen>('welcome')
   const [accepted, setAccepted] = useState(false)
-  const [noPosition, setNoPosition] = useState({ x: 0, y: 0 })
+  const [noPosition, setNoPosition] = useState(0)
   const reduceMotion = useReducedMotion()
   const motionProps = reduceMotion ? {} : { initial: { opacity: 0, y: 18, scale: .985 }, animate: { opacity: 1, y: 0, scale: 1 }, exit: { opacity: 0, y: -12, scale: .99 }, transition }
   const go = (next: Screen) => setScreen(next)
   const close = () => window.Telegram?.WebApp ? window.Telegram.WebApp.close?.() : go('welcome')
-  const dodgeNo = () => setNoPosition({ x: Math.round((Math.random() - .5) * 180), y: Math.round((Math.random() - .5) * 90) })
+  const dodgeNo = () => setNoPosition((current) => current === 0 ? (Math.random() > .5 ? 1 : 2) : current === 1 ? 2 : 1)
 
   return <main className="app-shell">
     <div className="ambient ambient-one"/><div className="ambient ambient-two"/>
@@ -55,13 +55,18 @@ export default function App() {
           </div><Cat className="letter-cat"/><Button onClick={() => go('question')}>Продолжить <span>♡</span></Button>
         </div>
       </motion.section>}
-      {screen === 'question' && <motion.section key="question" className="screen" {...motionProps}>
-        <p className="eyebrow">пятница · 6 ноября</p><h2 className="screen-title">Ты ведь<br/>не передумала?</h2>
-        <div className="yes-no-area">
-          <Button onClick={() => setAccepted(true)}>Не передумала</Button>
-          <motion.button className="no-button" style={{ x: noPosition.x, y: noPosition.y }} onPointerEnter={dodgeNo} onPointerDown={(event) => { event.preventDefault(); dodgeNo() }} onClick={dodgeNo} transition={{ type: 'spring', stiffness: 420, damping: 22 }}>Передумала</motion.button>
+      {screen === 'question' && <motion.section key="question" className="screen question-screen" {...motionProps}>
+        <div className="question-card">
+          <Cat className="question-cat"/>
+          <p className="eyebrow">пятница · 6 ноября</p>
+          <h2 className="screen-title">Ты ведь<br/>не передумала?</h2>
+          <p className="question-hint">Выбери правильный ответ</p>
+          {!accepted && <div className="yes-no-area">
+            <Button onClick={() => setAccepted(true)}>Не передумала</Button>
+            <motion.button className={`no-button no-position-${noPosition}`} onPointerEnter={dodgeNo} onPointerDown={(event) => { event.preventDefault(); dodgeNo() }} onClick={dodgeNo} layout transition={{ type: 'spring', stiffness: 420, damping: 25 }}>Передумала</motion.button>
+          </div>}
+          <AnimatePresence>{accepted && <motion.div className="question-answer" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0}}><p>Отлично. В пятницу зайду за тобой в 17:00.</p><Button onClick={() => go('secret')}>Дальше</Button></motion.div>}</AnimatePresence>
         </div>
-        <AnimatePresence>{accepted && <motion.div className="answer" initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} exit={{opacity:0}}><p>Отлично. В пятницу заеду за тобой в 17:00.</p><Button onClick={() => go('secret')}>Дальше</Button></motion.div>}</AnimatePresence>
       </motion.section>}
       {screen === 'secret' && <motion.section key="secret" className="screen secret-screen" {...motionProps}>
         <div className="glow-heart"><Heart size={32} fill="currentColor"/></div><p className="eyebrow">пятница · 6 ноября</p><h2 className="screen-title">План на вечер</h2>
