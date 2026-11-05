@@ -68,11 +68,11 @@ export default function App() {
       </motion.section>}
       {screen === 'invite' && <motion.section key="invite" className="screen invite-screen" {...motionProps}>
         <article className="invite-card"><div className="invite-border"><div className="invite-top"><span>✧</span><span className="eyebrow">A special evening for you</span><span>✧</span></div>
-          <div className="invite-flower">✦</div><h2>Нась,<br/><em>увидимся завтра</em></h2>
+          <div className="invite-flower">✦</div><h2><em>Увидимся завтра</em></h2>
           <div className="divider"><i/>♡<i/></div>
           <p className="date-label">ЗАВТРА · 17:00</p><p className="date">В 17:00 зайду за тобой.<br/>Будь готова.</p>
           <Cat mood="happy" className="invite-cat"/>
-          <div className="invite-actions"><Button onClick={() => {localStorage.setItem('nastya-answer','буду готова');go('final')}}>Хорошо, буду готова</Button><Button secondary onClick={() => {localStorage.setItem('nastya-answer','жду тебя');go('final')}}>Жду тебя</Button></div>
+          <div className="invite-actions"><Button onClick={() => {localStorage.setItem('nastya-answer','буду готова');go('final')}}>Хорошо, буду готова</Button></div>
         </div></article>
       </motion.section>}
       {screen === 'final' && <motion.section key="final" className="screen final-screen" {...motionProps}>
